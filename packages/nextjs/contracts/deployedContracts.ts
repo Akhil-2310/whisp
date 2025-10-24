@@ -4,6 +4,55 @@
  */
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
-const deployedContracts = {} as const;
+const deployedContracts = {
+  1660990954: {
+    HelloStatusNetwork: {
+      address: "0x915e224387428061d046d8A0c0E6954eAe930E92",
+      abi: [
+        {
+          inputs: [],
+          name: "getGreet",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "greet",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "_greet",
+              type: "string",
+            },
+          ],
+          name: "setGreet",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+      deployedOnBlock: 11713751,
+    },
+  },
+} as const;
 
 export default deployedContracts satisfies GenericContractsDeclaration;
