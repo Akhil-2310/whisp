@@ -3,6 +3,11 @@
 import Link from "next/link";
 import { BugAntIcon } from "@heroicons/react/24/outline";
 
+type HeaderMenuLink = {
+  label: string;
+  href: string;
+  icon?: React.ReactNode;
+};
 export const Header = () => {
   return (
     <header className="py-4 px-8 border-b border-gray-700 bg-gray-900">
@@ -33,3 +38,21 @@ export const Header = () => {
     </header>
   );
 };
+export const whispMenuLinks: HeaderMenuLink[] = [
+  {
+    label: "Whisp",
+    href: "/",
+  },
+  {
+    label: "Create Group",
+    href: "/create-group",
+  },
+  {
+    label: "Browse Groups",
+    href: "/browse-groups",
+  },
+  {
+    label: "My Groups",
+    href: "/my-groups",
+  },
+];

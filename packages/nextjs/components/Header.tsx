@@ -57,6 +57,7 @@ export const HeaderMenuLinks = () => {
  * Site header
  */
 export const Header = () => {
+  return null;
   const { targetNetwork } = useTargetNetwork();
   const isLocalNetwork = targetNetwork.id === hardhat.id;
 
