@@ -3041,7 +3041,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oclif/core@npm:^4, @oclif/core@npm:^4.5.4":
+"@oclif/core@npm:^4, @oclif/core@npm:^4.7.2":
   version: 4.7.2
   resolution: "@oclif/core@npm:4.7.2"
   dependencies:
@@ -3068,19 +3068,19 @@ __metadata:
   linkType: hard
 
 "@oclif/plugin-help@npm:^6":
-  version: 6.2.33
-  resolution: "@oclif/plugin-help@npm:6.2.33"
+  version: 6.2.34
+  resolution: "@oclif/plugin-help@npm:6.2.34"
   dependencies:
     "@oclif/core": ^4
-  checksum: c2fc7a2071f1149bc911f5d6a877616c471773ef128490bae09b465d54c025d2a675c179113ccf33e27d79f467bcfcf402c7e203572deb8e44ba42a6f15ae27a
+  checksum: 3d119e86bdb0a76a61b187ad90446871370d4dc8ea8b295d63f426dbbd05dc7204402691df3d9a94459c4aaaa3f15876e6cc77495572d0ec0f6aedfd34ba291d
   languageName: node
   linkType: hard
 
 "@oclif/plugin-plugins@npm:^5":
-  version: 5.4.50
-  resolution: "@oclif/plugin-plugins@npm:5.4.50"
+  version: 5.4.51
+  resolution: "@oclif/plugin-plugins@npm:5.4.51"
   dependencies:
-    "@oclif/core": ^4.5.4
+    "@oclif/core": ^4.7.2
     ansis: ^3.17.0
     debug: ^4.4.0
     npm: ^10.9.4
@@ -3091,7 +3091,7 @@ __metadata:
     validate-npm-package-name: ^5.0.1
     which: ^4.0.0
     yarn: ^1.22.22
-  checksum: 47f571aaee7e687d7ae396996241557a154830f7b3328d03e117f69a85d3598dab0db1d910eeab97165fba9aa6967498bba39dd69c84137cdbca9f0612c00aef
+  checksum: db6e19f8b87e0e090de12f8976a4d1731746501382eeaaed294799caa225a7ba80ac6969de81402b2114039a6b7c4094483fddba02562764ca3a73ff3037716a
   languageName: node
   linkType: hard
 
@@ -3522,6 +3522,7 @@ __metadata:
     "@types/qrcode": ~1.5.5
     "@typescript-eslint/eslint-plugin": ~8.27.0
     "@typescript-eslint/parser": ~8.27.0
+    "@zk-kit/lean-imt.sol": ^2.0.1
     chai: ~4.5.0
     dotenv: ~16.4.5
     envfile: ~7.1.0
@@ -5503,6 +5504,15 @@ __metadata:
     multiformats: ^13.3.1
     uint8arrays: ^5.1.0
   checksum: 547d30007132bbfeaf3c0af608db05f2bda595525a269077d9b19add11e513e7d0290b2cea63db1e33dbf7eb919c99d71d448f83591a27786e3627c8cbf9d10f
+  languageName: node
+  linkType: hard
+
+"@zk-kit/lean-imt.sol@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@zk-kit/lean-imt.sol@npm:2.0.1"
+  dependencies:
+    poseidon-solidity: 0.0.5
+  checksum: 1ebd5e099e9f010110b2711f755b11ed332d5fe40dac082fce8d726109f7ae888a1a648319eaa6251e18bc02e5c98ab9831c86c03cad835cb7248c334919755f
   languageName: node
   linkType: hard
 
@@ -9869,8 +9879,8 @@ __metadata:
   linkType: hard
 
 "got@npm:^14.4.5":
-  version: 14.6.0
-  resolution: "got@npm:14.6.0"
+  version: 14.6.1
+  resolution: "got@npm:14.6.1"
   dependencies:
     "@sindresorhus/is": ^7.0.1
     "@szmarczak/http-timer": ^5.0.1
@@ -9884,7 +9894,7 @@ __metadata:
     p-cancelable: ^4.0.1
     responselike: ^4.0.2
     type-fest: ^4.26.1
-  checksum: 6965c5ec424a082009c75c66e394b2d327bdc7a2080e0c60f5bf54793dc057b188a2a209713f099e0e9141d0942bd3c2ba8d6cc2fc77a39ac15f31cad21dcc4a
+  checksum: a73349e5081bcd4d154b4c262ac53d3aa88ed78c3679cf89114fc84ced09c67ed8e79a6138d53578f2da33432ad0592cf72053b59c0cdf1ea8405507b26532f1
   languageName: node
   linkType: hard
 
@@ -13939,6 +13949,13 @@ __metadata:
   version: 2.1.11
   resolution: "pony-cause@npm:2.1.11"
   checksum: 4aaa9ddab8f8225b5cbb32f7329a71b73679074579fa91f9e9d6853d398f3c2872de979519e1525c0c91d53afc82c32fddb76e379d19157e69ef1f7064523dfa
+  languageName: node
+  linkType: hard
+
+"poseidon-solidity@npm:0.0.5":
+  version: 0.0.5
+  resolution: "poseidon-solidity@npm:0.0.5"
+  checksum: eb2d84962505a3c8a5756752c8e571ad32f90f4d95fafaffbd03552abfa040553945990d96d0243ddd993d6c2e456a816435c97739610a4f6aabb9249ebf47d7
   languageName: node
   linkType: hard
 
