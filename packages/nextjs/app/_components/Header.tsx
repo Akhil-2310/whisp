@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { BugAntIcon } from "@heroicons/react/24/outline";
+import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 
 type HeaderMenuLink = {
   label: string;
@@ -34,6 +35,8 @@ export const Header = () => {
             Debug Contracts
           </Link>
         </nav>
+        <RainbowKitCustomConnectButton />
+        <FaucetButton />
       </div>
     </header>
   );
