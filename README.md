@@ -5,6 +5,8 @@
 
 ---
 
+## [Live Link](https://whisp-mu.vercel.app/)
+
 ## 🌐 TL;DR
 
 Whisp is a **privacy-first social signalling protocol** where verified individuals can send **trustworthy signals like feedbacks/votes without revealing their identity**.  
@@ -112,6 +114,18 @@ We chose **Status Network** because it aligns with Whisp’s mission —
 - 💬 Vibrant developer community  
 
 ---
+
+## Contracts Deployed and Verified on Status Network
+
+[Semaphore](https://sepoliascan.status.network/address/0x9d4454B023096f34B160D6B654540c56A1F81688?tab=contract)
+
+[SemaphoreVerifier](https://sepoliascan.status.network/address/0x7a2088a1bFc9d81c55368AE168C2C02570cB814F?tab=contract)
+
+[PoseidonT3](https://sepoliascan.status.network/address/0x8f86403A4DE0BB5791fa46B8e795C547942fE4Cf?tab=contract)
+
+[Whisp](https://sepoliascan.status.network/address/0x4309Eb90A37cfD0ecE450305B24a2DE68b73f312?tab=contract)
+
+[Gasless Transactions on Status Network](https://sepoliascan.status.network/address/0x4309Eb90A37cfD0ecE450305B24a2DE68b73f312?tab=txs)
 
 ## 👥 Team
 
