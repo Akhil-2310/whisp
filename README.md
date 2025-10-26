@@ -9,6 +9,8 @@
 
 ## [Video Demo](https://www.loom.com/share/5d32170117cd416489be9b735a36b281)
 
+## [Presentation](https://www.canva.com/design/DAG21Lsrmjs/CVtZxm08W8F0WT5qCVbMng/edit)
+
 ## 🌐 TL;DR
 
 Whisp is a **privacy-first social signalling protocol** where verified individuals can send **trustworthy signals like feedbacks/votes without revealing their identity**.  
@@ -135,3 +137,6 @@ We chose **Status Network** because it aligns with Whisp’s mission —
 
 - 🧑‍💻 **Akhil** — Full Stack + ZK Dev  
 - 🧑‍💻 **Kutman** — Frontend Dev  
+
+
+Wallet Address - 0x6cc717de21A631e02A425d7fe6138706Bc784197
