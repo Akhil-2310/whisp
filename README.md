@@ -1,80 +1,121 @@
-# 🏗 Scaffold-ETH 2
+# 🕵️‍♀️ Whisp
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+> **Whisp lets you speak without being seen.**  
+> A decentralized signalling platform where users can broadcast **verifiable messages anonymously** using **zero-knowledge proofs** on the **Status Network**.  
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+---
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+## 🌐 TL;DR
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+Whisp is a **privacy-first social signalling protocol** where verified individuals can send **trustworthy signals like feedbacks/votes without revealing their identity**.  
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+It uses **Semaphore** for anonymous group proofs, **Status Network** for censorship-resistant verification, and **Buidl Guidl** tooling for seamless development and smart contract deployment.
 
-## Requirements
+> 💡 Think “verified whispers” — truthful, anonymous, and onchain.
 
-Before you begin, you need to install the following tools:
+---
 
-- [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+## 🎯 Problem
 
-## Quickstart
+Online spaces force a binary choice:
+- **Anonymous = untrustworthy**  
+- **Verified = exposed**
 
-To get started with Scaffold-ETH 2, follow the steps below:
+Communities, DAOs, and whistleblowers need a way to **prove they belong** without revealing **who they are**.
 
-1. Install dependencies if it was skipped in CLI:
+Traditional platforms rely on centralized trust — admins, servers, or moderators — introducing bias, risk, and censorship.
 
-```
-cd my-dapp-example
-yarn install
-```
+---
 
-2. Run a local network in the first terminal:
+## 💡 Solution — *Whisp*
 
-```
-yarn chain
-```
+Whisp enables **verifiable anonymity** through zero-knowledge proofs.  
+It allows anyone to post a **signal** (vote, opinion, alert) verified by math — not by trust.
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/hardhat/hardhat.config.ts`.
+- 🧠 **Zero-Knowledge Proofs** — users prove they’re group members without revealing their identity  
+- 🔗 **Onchain Verification** — proofs verified by smart contracts on **Status Network**  
+- 🔒 **Anonymous but Accountable** — one signal per identity, no duplicates or Sybil attacks  
 
-3. On a second terminal, deploy the test contract:
+---
 
-```
-yarn deploy
-```
+## 🧩 How It Works
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
+1. **Create a Whisp Identity**
+   - User generates a **Semaphore identity** (private key never leaves device).  
 
-4. On a third terminal, start your NextJS app:
+2. **Join a Group**
+   - Group = community, company, or verified list.
+   - Each group has an onchain group ID.
 
-```
-yarn start
-```
+3. **Send a Whisp**
+   - User creates a **ZK proof** showing:
+     - Membership in group ✅  
+     - Unique signal nullifier 🆔  
+   - Proof sent to the Whisp smart contract.
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+4. **Verify & Broadcast**
+   - Smart contract verifies the proof.  
+   - Emits an event on Status Network → Whisp frontend fetches it → signal displayed anonymously.
 
-Run smart contract test with `yarn hardhat:test`
+---
 
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
+## 🏗️ Architecture
 
 
-## Documentation
+| Layer | Technology |
+|-------|-------------|
+| ZK Layer | Semaphore Protocol |
+| Smart Contract | Solidity + Foundry + Buidl Guidl Stack |
+| Blockchain | Status Network |
+| Frontend | Next.js + TailwindCSS + Viem |
+| Deployment | Vercel (Frontend) + Status Explorer (Contracts) |
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+---
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+## ⚙️ Tech Stack
 
-## Contributing to Scaffold-ETH 2
+| Category | Tools / Frameworks |
+|-----------|--------------------|
+| 🧱 Smart Contracts | Solidity, Hardhat |
+| 🔐 Zero-Knowledge | Semaphore, SnarkJS |
+| 🌐 Blockchain | Status Network |
+| 💻 Frontend | Next.js, TailwindCSS |
+| 🧰 Tooling | Buidl Guidl, Viem, Ethers.js |
+| ☁️ Hosting | Vercel |
 
-We welcome contributions to Scaffold-ETH 2!
+---
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+## 🧠 Example Use Cases
+ 
+- 🕵️ **Whistleblower Portal:** prove affiliation, stay safe  
+- 💬 **Private Group Chats:** anonymous verified discussions  
+- 🔔 **Signal Feed:** send onchain proofed messages for coordination  
+
+
+
+## 🔭 Future Roadmap
+
+- 🧩 **Self Protocol Integration** — nationality/age/gender based group entry  
+- 💬 **Onchain Group Messaging** — zk-based chatrooms  
+- 🪙 **Reputation Points** — build trust without identity  
+
+---
+
+## 🛡️ Why Status Network?
+
+We chose **Status Network** because it aligns with Whisp’s mission —  
+> “Privacy, freedom, and trustless communication.”
+
+- ⚡ Gas-efficient zk verification  
+- 🔐 Native privacy tooling  
+- 🌐 Decentralized communication layer  
+- 💬 Vibrant developer community  
+
+---
+
+## 👥 Team
+
+**Built by:**
+
+- 🧑‍💻 **Akhil** — Full Stack + ZK Dev  
+- 🧑‍💻 **Kutman** — Frontend Dev  
