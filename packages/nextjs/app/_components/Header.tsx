@@ -14,9 +14,12 @@ export const Header = () => {
   return (
     <header className="py-4 px-8 border-b border-base-300 bg-base-100">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-base-content">
-          <Link href="/">Whisp</Link>
-        </h1>
+        <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <img src="/whisp-logo.png" alt="Whisp Logo" className="h-16 w-16" />
+            <span className="text-2xl font-bold">Whisp</span>
+          </Link>
+        </div>
         <nav className="flex gap-6 items-center">
           {/* Main navigation links */}
           <Link href="/create-group" className="hover:text-primary transition-colors text-base-content">

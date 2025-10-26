@@ -7,7 +7,7 @@ export default function Page() {
       {/* --- 1. Hero Section --- */}
       <section className="text-center py-20 px-4 flex flex-col items-center justify-center bg-base-200">
         <h2 className="text-6xl font-extrabold mb-4 leading-tight text-base-content drop-shadow-lg">
-          Zero-Knowledge Privacy. Community Power.
+          Privacy is inevitable.
         </h2>
         <p className="text-xl mb-8 max-w-3xl text-base-content opacity-70">
           Whisp is a decentralized platform where you can form anonymous, interest-based groups, and cast votes or send
