@@ -48,22 +48,15 @@ function GroupCard({ registryId, onJoinGroup }: { registryId: number; onJoinGrou
 
   return (
     <>
-      <div className="card bg-gray-800 shadow-xl p-6 space-y-3 border border-gray-700 hover:border-gray-500 transition-all duration-300">
-        <h2 className="font-bold text-xl text-gray-100">{name}</h2>
-        <p className="text-sm text-gray-400">{description}</p>
-        <p className="text-xs text-gray-500">Created: {formatDate(createdAt)}</p>
+      <div className="card bg-base-100 shadow-xl p-6 space-y-3 border border-base-300 hover:border-primary transition-all duration-300">
+        <h2 className="font-bold text-xl text-base-content">{name}</h2>
+        <p className="text-sm text-base-content opacity-70">{description}</p>
+        <p className="text-xs text-base-content opacity-50">Created: {formatDate(createdAt)}</p>
         <div className="flex gap-4 pt-2">
-          <button
-            className="btn btn-outline btn-sm text-gray-400 border-gray-600 hover:bg-gray-700 hover:border-gray-700 transition-colors"
-            onClick={() => setShowDetails(true)}
-          >
+          <button className="btn btn-outline btn-sm" onClick={() => setShowDetails(true)}>
             View Details
           </button>
-          <button
-            className="btn btn-sm bg-gray-100 text-gray-900 font-semibold hover:bg-gray-300 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed"
-            onClick={() => onJoinGroup(registryId)}
-            disabled={hasJoined}
-          >
+          <button className="btn btn-primary btn-sm" onClick={() => onJoinGroup(registryId)} disabled={hasJoined}>
             {hasJoined ? "Already Joined" : "Join Group"}
           </button>
         </div>
@@ -72,37 +65,37 @@ function GroupCard({ registryId, onJoinGroup }: { registryId: number; onJoinGrou
       {/* Details Modal */}
       {showDetails && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-          <div className="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-md w-full border border-gray-700 relative">
+          <div className="bg-base-100 rounded-xl shadow-2xl p-8 max-w-md w-full border border-base-300 relative">
             <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-100"
+              className="absolute top-4 right-4 text-base-content opacity-70 hover:opacity-100"
               onClick={() => setShowDetails(false)}
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
 
-            <h2 className="text-3xl font-bold mb-4 text-gray-100 border-b border-gray-700 pb-2">{name}</h2>
-            <p className="text-gray-400 mb-6">{description}</p>
+            <h2 className="text-3xl font-bold mb-4 text-base-content border-b border-base-300 pb-2">{name}</h2>
+            <p className="text-base-content opacity-70 mb-6">{description}</p>
 
             <div className="space-y-3 text-sm">
               <p>
-                <strong className="text-gray-300">Registry ID:</strong> {registryId}
+                <strong className="text-base-content">Registry ID:</strong> {registryId}
               </p>
               <p>
-                <strong className="text-gray-300">Group ID:</strong> {groupId.toString()}
+                <strong className="text-base-content">Group ID:</strong> {groupId.toString()}
               </p>
               <p>
-                <strong className="text-gray-300">Creator:</strong>{" "}
-                <code className="bg-gray-700 p-1 rounded text-gray-200 text-xs">
+                <strong className="text-base-content">Creator:</strong>{" "}
+                <code className="bg-base-200 p-1 rounded text-base-content text-xs">
                   {creator.slice(0, 6)}...{creator.slice(-4)}
                 </code>
               </p>
               <p>
-                <strong className="text-gray-300">Created On:</strong> {formatDate(createdAt)}
+                <strong className="text-base-content">Created On:</strong> {formatDate(createdAt)}
               </p>
             </div>
 
             <button
-              className="btn w-full mt-6 bg-green-600 text-white font-semibold hover:bg-green-700 disabled:bg-gray-500 disabled:cursor-not-allowed"
+              className="btn btn-primary w-full mt-6"
               onClick={() => {
                 setShowDetails(false);
                 onJoinGroup(registryId);
@@ -169,13 +162,13 @@ export default function BrowseGroups() {
   const totalGroups = nextGroupIndex ? Number(nextGroupIndex) : 0;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 py-10">
+    <div className="min-h-screen bg-base-200 text-base-content py-10">
       <section className="max-w-xl mx-auto space-y-6 p-6">
-        <h1 className="text-3xl font-bold text-gray-100 text-center mb-6">Browse Anonymous Groups</h1>
+        <h1 className="text-3xl font-bold text-base-content text-center mb-6">Browse Anonymous Groups</h1>
 
         {totalGroups === 0 && (
           <div className="text-center">
-            <p className="text-gray-500 mt-4">No groups found. Be the first to create one!</p>
+            <p className="text-base-content opacity-50 mt-4">No groups found. Be the first to create one!</p>
           </div>
         )}
 

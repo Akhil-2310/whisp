@@ -80,9 +80,9 @@ export default function CreateProposalPage({ params }: { params: Promise<{ regis
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 py-10 px-6">
+    <div className="min-h-screen bg-base-200 text-base-content py-10 px-6">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
+        <div className="bg-base-100 rounded-xl p-8 border border-base-300">
           <h1 className="text-3xl font-bold mb-6">Create Proposal</h1>
 
           <div className="space-y-6">
@@ -93,7 +93,7 @@ export default function CreateProposalPage({ params }: { params: Promise<{ regis
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 placeholder="Proposal title"
-                className="input input-bordered w-full bg-gray-700 text-gray-200 border-gray-600"
+                className="input input-bordered w-full"
                 disabled={isSubmitting}
               />
             </div>
@@ -104,7 +104,7 @@ export default function CreateProposalPage({ params }: { params: Promise<{ regis
                 value={description}
                 onChange={e => setDescription(e.target.value)}
                 placeholder="Describe your proposal..."
-                className="textarea textarea-bordered w-full h-32 bg-gray-700 text-gray-200 border-gray-600"
+                className="textarea textarea-bordered w-full h-32 rounded"
                 disabled={isSubmitting}
               />
             </div>
@@ -119,7 +119,7 @@ export default function CreateProposalPage({ params }: { params: Promise<{ regis
                       value={option}
                       onChange={e => updateOption(index, e.target.value)}
                       placeholder={`Option ${index + 1}`}
-                      className="input input-bordered flex-1 bg-gray-700 text-gray-200 border-gray-600"
+                      className="input input-bordered flex-1"
                       disabled={isSubmitting}
                     />
                     {options.length > 2 && (
@@ -130,7 +130,7 @@ export default function CreateProposalPage({ params }: { params: Promise<{ regis
                   </div>
                 ))}
               </div>
-              <button onClick={addOption} className="btn btn-sm bg-gray-700 mt-2" disabled={isSubmitting}>
+              <button onClick={addOption} className="btn btn-sm btn-outline mt-2" disabled={isSubmitting}>
                 + Add Option
               </button>
             </div>
@@ -141,13 +141,13 @@ export default function CreateProposalPage({ params }: { params: Promise<{ regis
                 type="datetime-local"
                 value={endDate}
                 onChange={e => setEndDate(e.target.value)}
-                className="input input-bordered w-full bg-gray-700 text-gray-200 border-gray-600"
+                className="input input-bordered w-full"
                 disabled={isSubmitting}
               />
             </div>
 
-            <div className="bg-blue-900 bg-opacity-30 border border-blue-700 rounded-lg p-4">
-              <p className="text-sm text-blue-200">
+            <div className="bg-info bg-opacity-20 border border-info rounded-lg p-4">
+              <p className="text-sm text-base-content">
                 🗳️ <strong>Voting:</strong> Members can vote anonymously using zero-knowledge proofs. Each member can
                 vote once per proposal.
               </p>
@@ -157,13 +157,13 @@ export default function CreateProposalPage({ params }: { params: Promise<{ regis
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting || !title.trim() || !description.trim() || !endDate}
-                className="btn bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-600"
+                className="btn btn-primary"
               >
                 {isSubmitting ? "Creating..." : "Create Proposal"}
               </button>
               <button
                 onClick={() => router.push(`/group/${registryId}`)}
-                className="btn bg-gray-700 text-white hover:bg-gray-600"
+                className="btn btn-outline"
                 disabled={isSubmitting}
               >
                 Cancel

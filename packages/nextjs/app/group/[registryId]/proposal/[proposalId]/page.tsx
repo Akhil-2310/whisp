@@ -4,6 +4,7 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
+import { TransactionHash } from "~~/app/blockexplorer/_components/TransactionHash";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { useSemaphoreIdentity } from "~~/hooks/useSemaphoreIdentity";
 import { fetchGroupMembers } from "~~/utils/semaphore/groupMembers";
@@ -40,6 +41,7 @@ export default function ProposalDetailPage({
   const [voteCounts, setVoteCounts] = useState<{ [key: number]: number }>({});
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isVoting, setIsVoting] = useState(false);
+  const [transactionHash, setTransactionHash] = useState<string | null>(null);
 
   const { writeContractAsync: writeWhispAsync } = useScaffoldWriteContract({
     contractName: "Whisp",
@@ -120,11 +122,16 @@ export default function ProposalDetailPage({
 
       // 7. Submit proof to contract
       toast.loading("Submitting proof to blockchain...");
-      await writeWhispAsync({
+      const txHash = await writeWhispAsync({
         functionName: "validateSignal",
         args: [BigInt(registryId), formattedProof],
       });
       toast.dismiss();
+
+      // Store transaction hash
+      if (txHash) {
+        setTransactionHash(txHash);
+      }
 
       // 8. Store vote in Supabase
       const signalHash = computeSignalHash(proof.message).toString();
@@ -148,7 +155,7 @@ export default function ProposalDetailPage({
 
   if (!proposal) {
     return (
-      <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-base-200 text-base-content flex items-center justify-center">
         <p>Loading proposal...</p>
       </div>
     );
@@ -158,20 +165,20 @@ export default function ProposalDetailPage({
   const totalVotes = Object.values(voteCounts).reduce((sum, count) => sum + count, 0);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 py-10 px-6">
+    <div className="min-h-screen bg-base-200 text-base-content py-10 px-6">
       <div className="max-w-3xl mx-auto">
-        <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
+        <div className="bg-base-100 rounded-xl p-8 border border-base-300">
           <h1 className="text-3xl font-bold mb-4">{proposal.title}</h1>
-          <p className="text-gray-400 mb-6">{proposal.description}</p>
+          <p className="text-base-content opacity-70 mb-6">{proposal.description}</p>
 
           <div className="mb-6">
-            <div className="flex justify-between text-sm text-gray-500 mb-2">
+            <div className="flex justify-between text-sm text-base-content opacity-50 mb-2">
               <span>Ends: {new Date(proposal.end_date).toLocaleString()}</span>
-              <span className={isExpired ? "text-red-500" : "text-green-500"}>
+              <span className={isExpired ? "text-error" : "text-success"}>
                 {isExpired ? "Voting Closed" : "Voting Open"}
               </span>
             </div>
-            <div className="text-sm text-gray-500">Total Votes: {totalVotes}</div>
+            <div className="text-sm text-base-content opacity-50">Total Votes: {totalVotes}</div>
           </div>
 
           <div className="space-y-4 mb-6">
@@ -183,21 +190,26 @@ export default function ProposalDetailPage({
               return (
                 <div
                   key={index}
-                  onClick={() => !isExpired && setSelectedOption(index)}
+                  onClick={() => {
+                    if (!isExpired) {
+                      setSelectedOption(index);
+                      setTransactionHash(null); // Clear previous transaction hash
+                    }
+                  }}
                   className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                     selectedOption === index
-                      ? "border-blue-500 bg-blue-900 bg-opacity-30"
-                      : "border-gray-600 bg-gray-700 hover:border-gray-500"
+                      ? "border-primary bg-primary bg-opacity-20"
+                      : "border-base-300 bg-base-200 hover:border-primary"
                   } ${isExpired ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-medium">{option}</span>
-                    <span className="text-sm text-gray-400">
+                    <span className="text-sm text-base-content opacity-70">
                       {votes} votes ({percentage}%)
                     </span>
                   </div>
-                  <div className="w-full bg-gray-600 rounded-full h-2">
-                    <div className="bg-blue-500 h-2 rounded-full transition-all" style={{ width: `${percentage}%` }} />
+                  <div className="w-full bg-base-300 rounded-full h-2">
+                    <div className="bg-primary h-2 rounded-full transition-all" style={{ width: `${percentage}%` }} />
                   </div>
                 </div>
               );
@@ -209,30 +221,41 @@ export default function ProposalDetailPage({
               <button
                 onClick={handleVote}
                 disabled={isVoting || selectedOption === null || !isConnected}
-                className="btn bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-600"
+                className="btn btn-primary"
               >
                 {isVoting ? "Submitting Vote..." : "Submit Vote"}
               </button>
-              <button
-                onClick={() => router.push(`/group/${registryId}`)}
-                className="btn bg-gray-700 text-white hover:bg-gray-600"
-              >
+              <button onClick={() => router.push(`/group/${registryId}`)} className="btn btn-outline">
                 Back to Group
               </button>
             </div>
           )}
 
+          {/* Transaction Details */}
+          {transactionHash && (
+            <div className="mt-6 bg-success bg-opacity-20 border border-success rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2 h-2 bg-success rounded-full"></div>
+                <h3 className="text-lg font-semibold text-base-content">Vote Transaction Confirmed!</h3>
+              </div>
+              <p className="text-sm text-base-content opacity-70 mb-3">
+                Your anonymous vote has been successfully submitted to the blockchain.
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-base-content">Transaction:</span>
+                <TransactionHash hash={transactionHash} />
+              </div>
+            </div>
+          )}
+
           {isExpired && (
-            <button
-              onClick={() => router.push(`/group/${registryId}`)}
-              className="btn bg-gray-700 text-white hover:bg-gray-600"
-            >
+            <button onClick={() => router.push(`/group/${registryId}`)} className="btn btn-outline">
               Back to Group
             </button>
           )}
 
-          <div className="mt-6 bg-blue-900 bg-opacity-30 border border-blue-700 rounded-lg p-4">
-            <p className="text-sm text-blue-200">
+          <div className="mt-6 bg-info bg-opacity-20 border border-info rounded-lg p-4">
+            <p className="text-sm text-base-content">
               🔒 <strong>Anonymous Voting:</strong> Your vote is submitted using zero-knowledge proofs, keeping your
               identity private while proving you&apos;re a group member.
             </p>

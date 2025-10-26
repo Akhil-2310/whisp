@@ -4,6 +4,7 @@ import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
+import { TransactionHash } from "~~/app/blockexplorer/_components/TransactionHash";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { useSemaphoreIdentity } from "~~/hooks/useSemaphoreIdentity";
 import { fetchGroupMembers } from "~~/utils/semaphore/groupMembers";
@@ -25,6 +26,7 @@ export default function CreatePostPage({ params }: { params: Promise<{ registryI
   const { identity } = useSemaphoreIdentity();
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [transactionHash, setTransactionHash] = useState<string | null>(null);
 
   // Fetch group data to get groupId for Semaphore
   const { data: groupData } = useScaffoldReadContract({
@@ -93,11 +95,16 @@ export default function CreatePostPage({ params }: { params: Promise<{ registryI
 
       // 7. Submit proof to contract
       toast.loading("Submitting proof to blockchain...");
-      await writeWhispAsync({
+      const txHash = await writeWhispAsync({
         functionName: "validateSignal",
         args: [BigInt(registryId), formattedProof],
       });
       toast.dismiss();
+
+      // Store transaction hash
+      if (txHash) {
+        setTransactionHash(txHash);
+      }
 
       // 8. Store post content in Supabase
       // The signal hash and scope hash are computed on-chain as:
@@ -121,9 +128,9 @@ export default function CreatePostPage({ params }: { params: Promise<{ registryI
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 py-10 px-6">
+    <div className="min-h-screen bg-base-200 text-base-content py-10 px-6">
       <div className="max-w-2xl mx-auto">
-        <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
+        <div className="bg-base-100 rounded-xl p-8 border border-base-300">
           <h1 className="text-3xl font-bold mb-6">Create Anonymous Post</h1>
 
           <div className="space-y-4">
@@ -131,23 +138,26 @@ export default function CreatePostPage({ params }: { params: Promise<{ registryI
               <label className="block text-sm font-medium mb-2">Post Content</label>
               <textarea
                 value={content}
-                onChange={e => setContent(e.target.value)}
+                onChange={e => {
+                  setContent(e.target.value);
+                  setTransactionHash(null); // Clear previous transaction hash
+                }}
                 placeholder="Share your thoughts anonymously..."
-                className="textarea textarea-bordered w-full h-40 bg-gray-700 text-gray-200 border-gray-600"
+                className="textarea textarea-bordered w-full h-40 rounded"
                 disabled={isSubmitting}
               />
             </div>
 
-            <div className="bg-blue-900 bg-opacity-30 border border-blue-700 rounded-lg p-4">
-              <p className="text-sm text-blue-200">
+            <div className="bg-info bg-opacity-20 border border-info rounded-lg p-4">
+              <p className="text-sm text-base-content">
                 🔒 <strong>Privacy Notice:</strong> Your post will be published anonymously using zero-knowledge proofs.
                 Only members of this group can post, but your identity will remain private.
               </p>
             </div>
 
             {identity && (
-              <div className="bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg p-3">
-                <p className="text-xs text-gray-400">
+              <div className="bg-base-200 border border-base-300 rounded-lg p-3">
+                <p className="text-xs text-base-content opacity-70">
                   <strong>Your Identity Commitment:</strong>{" "}
                   <code className="text-xs break-all">{identity.commitment.toString()}</code>
                 </p>
@@ -158,18 +168,35 @@ export default function CreatePostPage({ params }: { params: Promise<{ registryI
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting || !content.trim() || !isConnected}
-                className="btn bg-green-600 text-white hover:bg-green-700 disabled:bg-gray-600"
+                className="btn btn-primary"
               >
                 {isSubmitting ? "Publishing..." : "Publish Post"}
               </button>
               <button
                 onClick={() => router.push(`/group/${registryId}`)}
-                className="btn bg-gray-700 text-white hover:bg-gray-600"
+                className="btn btn-outline"
                 disabled={isSubmitting}
               >
                 Cancel
               </button>
             </div>
+
+            {/* Transaction Details */}
+            {transactionHash && (
+              <div className="mt-6 bg-success bg-opacity-20 border border-success rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-success rounded-full"></div>
+                  <h3 className="text-lg font-semibold text-base-content">Post Transaction Confirmed!</h3>
+                </div>
+                <p className="text-sm text-base-content opacity-70 mb-3">
+                  Your anonymous post has been successfully submitted to the blockchain.
+                </p>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-base-content">Transaction:</span>
+                  <TransactionHash hash={transactionHash} />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

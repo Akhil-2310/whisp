@@ -72,10 +72,10 @@ export default function GroupDetailPage({ params }: { params: Promise<{ registry
 
   if (!group || !group.exists) {
     return (
-      <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-base-200 text-base-content flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Group Not Found</h1>
-          <button onClick={() => router.push("/browse-groups")} className="btn bg-gray-700">
+          <button onClick={() => router.push("/browse-groups")} className="btn btn-primary">
             Back to Browse
           </button>
         </div>
@@ -84,23 +84,23 @@ export default function GroupDetailPage({ params }: { params: Promise<{ registry
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 py-10 px-6">
+    <div className="min-h-screen bg-base-200 text-base-content py-10 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Group Header */}
-        <div className="bg-gray-800 rounded-xl p-8 mb-6 border border-gray-700">
+        <div className="bg-base-100 rounded-xl p-8 mb-6 border border-base-300">
           <h1 className="text-4xl font-bold mb-4">{group.name}</h1>
-          <p className="text-gray-400 mb-4">{group.description}</p>
+          <p className="text-base-content opacity-70 mb-4">{group.description}</p>
           <div className="flex gap-4">
             <button
               onClick={() => router.push(`/group/${registryId}/create-post`)}
-              className="btn bg-green-600 text-white hover:bg-green-700"
+              className="btn btn-primary"
               disabled={!isConnected}
             >
               Create Post
             </button>
             <button
               onClick={() => router.push(`/group/${registryId}/create-proposal`)}
-              className="btn bg-blue-600 text-white hover:bg-blue-700"
+              className="btn btn-secondary"
               disabled={!isConnected}
             >
               Create Proposal
@@ -112,13 +112,13 @@ export default function GroupDetailPage({ params }: { params: Promise<{ registry
         <div className="flex gap-4 mb-6">
           <button
             onClick={() => setActiveTab("posts")}
-            className={`btn ${activeTab === "posts" ? "bg-gray-700" : "bg-gray-800"} text-white`}
+            className={`btn ${activeTab === "posts" ? "btn-primary" : "btn-outline"}`}
           >
             Posts ({posts.length})
           </button>
           <button
             onClick={() => setActiveTab("proposals")}
-            className={`btn ${activeTab === "proposals" ? "bg-gray-700" : "bg-gray-800"} text-white`}
+            className={`btn ${activeTab === "proposals" ? "btn-primary" : "btn-outline"}`}
           >
             Proposals ({proposals.length})
           </button>
@@ -129,14 +129,14 @@ export default function GroupDetailPage({ params }: { params: Promise<{ registry
           {activeTab === "posts" && (
             <>
               {posts.length === 0 ? (
-                <div className="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
-                  <p className="text-gray-400">No posts yet. Be the first to post!</p>
+                <div className="bg-base-100 rounded-lg p-8 text-center border border-base-300">
+                  <p className="text-base-content opacity-70">No posts yet. Be the first to post!</p>
                 </div>
               ) : (
                 posts.map(post => (
-                  <div key={post.id} className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-                    <p className="text-gray-200 mb-2">{post.content}</p>
-                    <p className="text-xs text-gray-500">
+                  <div key={post.id} className="bg-base-100 rounded-lg p-6 border border-base-300">
+                    <p className="text-base-content mb-2">{post.content}</p>
+                    <p className="text-xs text-base-content opacity-50">
                       Posted anonymously on {new Date(post.created_at).toLocaleString()}
                     </p>
                   </div>
@@ -148,19 +148,19 @@ export default function GroupDetailPage({ params }: { params: Promise<{ registry
           {activeTab === "proposals" && (
             <>
               {proposals.length === 0 ? (
-                <div className="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
-                  <p className="text-gray-400">No proposals yet. Create the first proposal!</p>
+                <div className="bg-base-100 rounded-lg p-8 text-center border border-base-300">
+                  <p className="text-base-content opacity-70">No proposals yet. Create the first proposal!</p>
                 </div>
               ) : (
                 proposals.map(proposal => (
                   <div
                     key={proposal.id}
-                    className="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-blue-500 transition-all cursor-pointer"
+                    className="bg-base-100 rounded-lg p-6 border border-base-300 hover:border-primary transition-all cursor-pointer"
                     onClick={() => router.push(`/group/${registryId}/proposal/${proposal.id}`)}
                   >
                     <h3 className="text-xl font-bold mb-2">{proposal.title}</h3>
-                    <p className="text-gray-400 mb-4">{proposal.description}</p>
-                    <div className="flex justify-between items-center text-sm text-gray-500">
+                    <p className="text-base-content opacity-70 mb-4">{proposal.description}</p>
+                    <div className="flex justify-between items-center text-sm text-base-content opacity-50">
                       <span>Options: {(proposal.options as string[]).length}</span>
                       <span>Ends: {new Date(proposal.end_date).toLocaleDateString()}</span>
                     </div>

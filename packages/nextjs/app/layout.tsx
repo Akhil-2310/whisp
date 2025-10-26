@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning className={``}>
       {}
-      <body className="min-h-screen bg-gray-900 text-gray-100">
+      <body className="min-h-screen bg-base-200 text-base-content">
         <ThemeProvider enableSystem>
           <ScaffoldEthAppWithProviders>
             {/* Global Navbar */}
