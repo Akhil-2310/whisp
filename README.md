@@ -7,6 +7,8 @@
 
 ## [Live Link](https://whisp-mu.vercel.app/)
 
+## [Video Demo](https://www.loom.com/share/5d32170117cd416489be9b735a36b281)
+
 ## 🌐 TL;DR
 
 Whisp is a **privacy-first social signalling protocol** where verified individuals can send **trustworthy signals like feedbacks/votes without revealing their identity**.  
